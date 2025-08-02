@@ -17,6 +17,7 @@ while True:
     print('7. Salir del programa.')
 
     option = input('Elija una opción: ')
+    print()
 
     match option:
         case '1':
@@ -35,15 +36,31 @@ while True:
             student['courses'] = {}
 
             students[student_id] = student
+            print()
 
         case '2':
-            while True:
+            if len(students) > 0:
                 student_id = input('Ingrese el ID de estudiante: ')
                 if check_id(student_id):
                     course_name = input('Ingrese el nombre del curso: ')
-                    grade = int(input('Ingrese la nota: '))
+                    while True:
+                        try:
+                            grade = int(input('Ingrese la nota: '))
+                            if grade < 0 or grade > 100:
+                                print('Nota fuera de rango.\n')
+                                continue
+                            print()
+                            break
+                        except ValueError:
+                            print('Error: Debe ser un número entero.\n')
+                        except Exception as e:
+                            print('Un error a ocurrido.', e)
 
                     students[student_id]['courses'][course_name] = grade
+                else:
+                    print('Estudiante no registrado.\n')
+            else:
+                print('No hay estudiantes registrados.\n')
 
         case '3':
             pass
