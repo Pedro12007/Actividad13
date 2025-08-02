@@ -7,7 +7,7 @@ def check_id(student_id):
         return False
 
 while True:
-    print('Opciones:')
+    print('OPCIONES:')
     print('1. Agregar estudiantes.')
     print('2. Agregar curso con nota.')
     print('3. Consultar estudiante.')
@@ -40,7 +40,7 @@ while True:
 
         case '2':
             if len(students) > 0:
-                student_id = input('Ingrese el ID de estudiante: ')
+                student_id = input('Ingrese el ID del estudiante: ')
                 if check_id(student_id):
                     course_name = input('Ingrese el nombre del curso: ')
                     while True:
@@ -63,7 +63,21 @@ while True:
                 print('No hay estudiantes registrados.\n')
 
         case '3':
-            pass
+            if len(students) > 0:
+                student_id = input('Ingrese el ID del estudiante: ')
+                if check_id(student_id):
+                    print('\nDATOS:')
+                    print(f'Nombre: {students[student_id]['name']}')
+                    print(f'Carrera: {students[student_id]['career']}')
+                    if len(students[student_id]['courses']) > 0:
+                        print('Notas:')
+                        for course, grade in students[student_id]['courses'].items():
+                            print(f'Curso: {course} | Nota: {grade}')
+                    else:
+                        print('No hay notas registradas.\n')
+                    print()
+                else:
+                    print('Estudiante no registrado.\n')
 
         case '4':
             pass
