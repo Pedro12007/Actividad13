@@ -22,8 +22,8 @@ while True:
         case '1':
             student = {}
             while True:
-                id = input('Ingrese el ID de estudiante: ')
-                if not check_id(id):
+                student_id = input('Ingrese el ID de estudiante: ')
+                if not check_id(student_id):
                     break
                 else:
                     print('ID ya existe. Intente nuevamente.\n')
@@ -34,10 +34,16 @@ while True:
             student['career'] = career
             student['courses'] = {}
 
-            students[id] = student
+            students[student_id] = student
 
         case '2':
-            pass
+            while True:
+                student_id = input('Ingrese el ID de estudiante: ')
+                if check_id(student_id):
+                    course_name = input('Ingrese el nombre del curso: ')
+                    grade = int(input('Ingrese la nota: '))
+
+                    students[student_id]['courses'][course_name] = grade
 
         case '3':
             pass
