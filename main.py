@@ -1,5 +1,11 @@
 students = {}
 
+def check_id(student_id):
+    if student_id in students:
+        return True
+    else:
+        return False
+
 while True:
     print('Opciones:')
     print('1. Agregar estudiantes.')
@@ -14,7 +20,21 @@ while True:
 
     match option:
         case '1':
-            pass
+            student = {}
+            while True:
+                id = input('Ingrese el ID de estudiante: ')
+                if not check_id(id):
+                    break
+                else:
+                    print('ID ya existe. Intente nuevamente.\n')
+            name = input('Ingrese el nombre: ')
+            career = input('Ingrese carrera o programa académico: ')
+
+            student['name'] = name
+            student['career'] = career
+            student['courses'] = {}
+
+            students[id] = student
 
         case '2':
             pass
