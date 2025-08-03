@@ -6,6 +6,20 @@ def check_id(student_id):
     else:
         return False
 
+def average(student_id):
+    if len(students[student_id]['courses']) > 0:
+        sum = 0
+        for grade in students[student_id]['courses'].values():
+            sum += grade
+        try:
+            return sum / len(students[student_id]['courses'])
+        except ZeroDivisionError:
+            print('Error: No se puede dividir por cero.')
+        except Exception as e:
+            print('Un error ha ocurrido.', e)
+    else:
+        return 'No hay notas registradas.'
+
 while True:
     print('OPCIONES:')
     print('1. Agregar estudiantes.')
@@ -54,7 +68,7 @@ while True:
                         except ValueError:
                             print('Error: Debe ser un número entero.\n')
                         except Exception as e:
-                            print('Un error a ocurrido.', e)
+                            print('Un error ha ocurrido.', e)
 
                     students[student_id]['courses'][course_name] = grade
                 else:
@@ -78,9 +92,19 @@ while True:
                     print()
                 else:
                     print('Estudiante no registrado.\n')
+            else:
+                print('No hay estudiantes registrados.\n')
 
         case '4':
-            pass
+            if len(students) > 0:
+                student_id = input('Ingrese el ID del estudiante: ')
+                if check_id(student_id):
+                    print('\nPROMEDIO:')
+                    print(f'{average(student_id)}\n')
+                else:
+                    print('Estudiante no registrado.\n')
+            else:
+                print('No hay estudiantes registrados.\n')
 
         case '5':
             pass
