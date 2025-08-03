@@ -114,12 +114,14 @@ while True:
                 student_id = input('Ingrese el ID del estudiante: ')
                 if check_id(student_id):
                     if len(students[student_id]['courses']) > 0:
+                        counter = 0
                         for grade in students[student_id]['courses'].values():
                             if grade < 61:
-                                print('No aprobará todos los cursos.\n')
-                                break
-                            else:
-                                print('Aprobará todos los cursos.\n')
+                                counter += 1
+                        if counter > 0:
+                            print('No aprobará todos los cursos.\n')
+                        else:
+                            print('Aprobará todos los cursos.\n')
                 else:
                     print('Estudiante no registrado.\n')
             else:
