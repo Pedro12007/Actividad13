@@ -20,6 +20,17 @@ def average(student_id):
     else:
         return 'No hay notas registradas.'
 
+def get_students_info(student_id):
+    print(f'Nombre: {students[student_id]['name']}')
+    print(f'Carrera: {students[student_id]['career']}')
+    if len(students[student_id]['courses']) > 0:
+        print('Notas:')
+        for course, grade in students[student_id]['courses'].items():
+            print(f'    Curso: {course} | Nota: {grade}')
+    else:
+        print('No hay notas registradas.\n')
+    print()
+
 while True:
     print('OPCIONES:')
     print('1. Agregar estudiantes.')
@@ -81,15 +92,7 @@ while True:
                 student_id = input('Ingrese el ID del estudiante: ')
                 if check_id(student_id):
                     print('\nDATOS:')
-                    print(f'Nombre: {students[student_id]['name']}')
-                    print(f'Carrera: {students[student_id]['career']}')
-                    if len(students[student_id]['courses']) > 0:
-                        print('Notas:')
-                        for course, grade in students[student_id]['courses'].items():
-                            print(f'Curso: {course} | Nota: {grade}')
-                    else:
-                        print('No hay notas registradas.\n')
-                    print()
+                    get_students_info(student_id)
                 else:
                     print('Estudiante no registrado.\n')
             else:
@@ -107,10 +110,29 @@ while True:
                 print('No hay estudiantes registrados.\n')
 
         case '5':
-            pass
+            if len(students) > 0:
+                student_id = input('Ingrese el ID del estudiante: ')
+                if check_id(student_id):
+                    if len(students[student_id]['courses']) > 0:
+                        for grade in students[student_id]['courses'].values():
+                            if grade < 61:
+                                print('No aprobará todos los cursos.\n')
+                                break
+                            else:
+                                print('Aprobará todos los cursos.\n')
+                else:
+                    print('Estudiante no registrado.\n')
+            else:
+                print('No hay estudiantes registrados.\n')
 
         case '6':
-            pass
+            if len(students) > 0:
+                print('\nDATOS GENERALES:')
+                for id in students.keys():
+                    print(f'\nID: {id}')
+                    get_students_info(id)
+            else:
+                print('No hay estudiantes registrados.\n')
 
         case '7':
             print('Saliendo del programa...')
